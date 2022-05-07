@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { User } from '@firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { forkJoin, from, Observable, pluck, switchMap } from 'rxjs';
+import { forkJoin, from, map, Observable, pluck, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SignInCredentials, SignUpCredentials } from './auth.model';
 
@@ -59,7 +59,12 @@ export class AuthService {
   }
 
   signOut() {
-    return from(this.auth.signOut());
+    const user = this.getCurrentUser();
+
+    return from(this.auth.signOut()).pipe(
+      map(() => `${environment.firebase.apiUrl}/revokeStreamToken`),
+      switchMap((url) => this.http.post(url, { user }))
+    );
   }
 
   private createStreamUser(

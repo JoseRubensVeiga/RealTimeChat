@@ -66,3 +66,29 @@ export const createStreamToken = functions.https.onRequest(
     });
   }
 );
+
+export const revokeStreamToken = functions.https.onRequest(
+  (request, response) => {
+    cors(request, response, async () => {
+      const { user } = request.body;
+
+      if (!user) {
+        throw new functions.https.HttpsError(
+          'failed-precondition',
+          'The function must be called while authenticated'
+        );
+      }
+
+      try {
+        await serverStreamInstance.revokeUserToken(user.uid);
+
+        response.status(200).send({});
+      } catch {
+        throw new functions.https.HttpsError(
+          'aborted',
+          'Could not create Stream Token'
+        );
+      }
+    });
+  }
+);
