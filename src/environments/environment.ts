@@ -10,8 +10,10 @@ export const environment = {
     apiKey: 'AIzaSyB3os47lJ56FEeK8e8vNb5UHdi8u_XDsX8',
     authDomain: 'get-stream-io-real-time-chat.firebaseapp.com',
     messagingSenderId: '1025457563937',
+    apiUrl:
+      'https://us-central1-get-stream-io-real-time-chat.cloudfunctions.net',
   },
-  production: false
+  production: false,
 };
 
 /*
