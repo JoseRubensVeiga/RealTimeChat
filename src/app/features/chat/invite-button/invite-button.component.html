@@ -1,0 +1,22 @@
+<button mat-stroked-button (click)="showModal = true">Invite users</button>
+
+<stream-modal [(isOpen)]="showModal">
+  <mat-form-field>
+    <mat-label>Search users</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"
+    />
+  </mat-form-field>
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onAddUser($event)"
+  >
+    <mat-option *ngFor="let user of availableUsers$ | async" [value]="user.id">
+      {{ user.name }}
+    </mat-option>
+  </mat-autocomplete>
+</stream-modal>
