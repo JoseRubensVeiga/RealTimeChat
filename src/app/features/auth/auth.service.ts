@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import {
+  Auth,
+  authState,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from '@angular/fire/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { from, switchMap } from 'rxjs';
+import { SignInCredentials, SignUpCredentials } from './auth.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  readonly isLoggedIn$ = authState(this.auth);
 
-  private authState = new BehaviorSubject<Object | null>(null);
-  
-  readonly isLoggedIn$ = this.authState.asObservable();
+  constructor(private auth: Auth) {}
 
-  constructor() { }
-
-  signIn(credentials: Object) {
-    this.authState.next(credentials)
+  signIn({ email, password }: SignInCredentials) {
+    return from(signInWithEmailAndPassword(this.auth, email, password));
   }
 
-  signUp(user: Object) {
-    this.authState.next(user)
+  signUp({ email, password, displayName }: SignUpCredentials) {
+    return from(
+      createUserWithEmailAndPassword(this.auth, email, password)
+    ).pipe(switchMap(({ user }) => updateProfile(user, { displayName })));
+  }
+
+  signOut() {
+    return from(this.auth.signOut());
   }
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "get-stream-io-real-time-chat": {
+      "hosting": {
+        "getstream-chat-angular-example": [
+          "get-stream-io-real-time-chat"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "get-stream-io-real-time-chat"
+  }
+}

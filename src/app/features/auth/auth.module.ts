@@ -7,15 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-declarations: [
-    SigninComponent,
-    SignupComponent,
-    FormContainerComponent
-  ],
+  declarations: [SigninComponent, SignupComponent, FormContainerComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -23,7 +20,8 @@ declarations: [
     MatFormFieldModule,
     MatButtonModule,
     MatDividerModule,
-    RouterModule
-  ]
+    MatSnackBarModule,
+    RouterModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}
