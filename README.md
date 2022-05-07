@@ -1,27 +1,39 @@
-# GetstreamChatAngularExample
+# Chat Online com GetStream.io e Angular 13
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
+Este projeto consiste em um estudo pessoal sobre desenvolvimento de aplicações com conexão web socket
 
-## Development server
+# Servidor de desenvolvimento
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Execute `ng serve` para iniciar um servidor local. Navegue até `http://localhost:4211`.
 
-## Code scaffolding
+# Telas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Atenticação
 
-## Build
+<div>
+  <img src="./src/assets/readme_images/sign-in.png" width="45%" height="200px">
+  <img src="./src/assets/readme_images/sign-up.png" width="45%" height="200px" style="float: right">
+</div>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Integração com o Firebase Authentication, utilizando o pacote `@angular/fire`.
 
-## Running unit tests
+## Chat
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![chat](./src/assets/readme_images/chat.png)
+Componentes padrões do Angular providos por GetStream.io através dos pacotes `stream-chat-angular` e `stream-chat`.
 
-## Running end-to-end tests
+# Integração GetStream.io + Firebase Functions
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+As funções do azure estão no arquivo `/functions/src/index.ts`
 
-## Further help
+## Function createStreamUser
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Essa função é executada quando o usuário é criado pelo Firebase e cria um usuário com os mesmo dados no GetStream.io.
+
+## Function createStreamToken
+
+Essa função cria e obtém o token da GetStream.io.
+
+## Function revokeStreamToken
+
+Essa função revoga o token atual do usuário logado no GetStream.io.
