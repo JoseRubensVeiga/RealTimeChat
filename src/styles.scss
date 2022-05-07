@@ -1,6 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material'as mat;
+@use "@angular/material" as mat;
+@import "~stream-chat-angular/src/assets/styles/scss/index.scss";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -19,10 +20,15 @@ $getstream-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$getstream-theme: mat.define-light-theme((color: (primary: $getstream-primary,
+$getstream-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $getstream-primary,
       accent: $getstream-accent,
       warn: $getstream-warn,
-    )));
+    ),
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

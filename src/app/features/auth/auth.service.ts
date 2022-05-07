@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { User } from '@firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { forkJoin, from, Observable, switchMap } from 'rxjs';
+import { forkJoin, from, Observable, pluck, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SignInCredentials, SignUpCredentials } from './auth.model';
 
@@ -19,6 +19,27 @@ export class AuthService {
   readonly isLoggedIn$ = authState(this.auth);
 
   constructor(private auth: Auth, private http: HttpClient) {}
+
+  getCurrentUser() {
+    return this.auth.currentUser!;
+  }
+
+  getStreamToken() {
+    const baseUrl = environment.firebase.apiUrl;
+    const url = `${baseUrl}/createStreamToken`;
+
+    const firebaseUser = this.getCurrentUser();
+
+    const user = {
+      uid: firebaseUser.uid,
+      email: firebaseUser.email,
+      displayName: firebaseUser.displayName,
+    };
+
+    return this.http
+      .post<{ token: string }>(url, { user })
+      .pipe(pluck('token'));
+  }
 
   signIn({ email, password }: SignInCredentials) {
     return from(signInWithEmailAndPassword(this.auth, email, password));

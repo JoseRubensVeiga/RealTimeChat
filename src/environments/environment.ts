@@ -14,6 +14,9 @@ export const environment = {
       'https://us-central1-get-stream-io-real-time-chat.cloudfunctions.net',
   },
   production: false,
+  stream: {
+    key: 'q4h8qmzqruas',
+  },
 };
 
 /*

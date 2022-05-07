@@ -10,4 +10,7 @@ export const environment = {
       'https://us-central1-get-stream-io-real-time-chat.cloudfunctions.net/createStreamUser',
   },
   production: true,
+  stream: {
+    key: 'q4h8qmzqruas',
+  },
 };
